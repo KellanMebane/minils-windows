@@ -1,0 +1,9 @@
+[package]
+name = "minils"
+version = "0.1.0"
+authors = ["KellanMebane <kellanmebane@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+chrono = "0.4.6"
+filetime = "0.1"
