@@ -1,15 +1,14 @@
 extern crate chrono;
 extern crate filetime;
 
-use minils::FileDisplayInfo;
 use minils::Config;
+use minils::FileDisplayInfo;
 use minils::InputOptions;
 
 use chrono::prelude::*;
 use filetime::FileTime;
 use std::env;
-use std::fs::{self, DirEntry};
-use std::io;
+use std::fs;
 use std::os::windows::fs::MetadataExt;
 use std::path::Path;
 use std::process;
@@ -36,7 +35,8 @@ fn main() {
             let name = entry.file_name().into_string().unwrap();
 
             if let Ok(metadata) = entry.metadata() {
-                let file_attributes = minils::format_windows_file_attributes(metadata.file_attributes());
+                let file_attributes =
+                    minils::format_windows_file_attributes(metadata.file_attributes());
 
                 let length = metadata.len();
 
@@ -64,7 +64,7 @@ fn main() {
     for line in &lines {
         if !line.hidden || show_hidden {
             println!(
-                "{:5}       {:19}       {:<longest$}      {}",
+                "{:5}       {:19}       {:>longest$}      {}",
                 line.file_attributes,
                 line.last_write_time.format("%m/%d/%Y  %l:%M %p"),
                 match line.length {
